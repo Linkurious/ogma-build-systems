@@ -1,0 +1,17 @@
+{
+  "name": "@linkurious/ogma-build-systems",
+  "version": "1.0.0",
+  "description": "Build system templates for Ogma.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ogma",
+    "webpack",
+    "vite",
+    "template"
+  ],
+  "author": "",
+  "license": "ISC"
+}
