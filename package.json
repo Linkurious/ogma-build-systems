@@ -13,5 +13,8 @@
     "template"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@linkurious/code-tools": "^0.0.14"
+  }
 }
