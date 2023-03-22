@@ -7,14 +7,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\"",
+    "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\"",
     "build:vite": "cd vite && npm run build",
     "build:rollup": "cd rollup && npm run build",
     "build:webpack": "cd webpack && npm run build",
-    "prepare": "node scripts/prepare.js && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" && node scripts/cleanup.js",
+    "build:typescript": "cd typescript && npm run build",
+    "prepare": "node scripts/prepare.js && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" && node scripts/cleanup.js",
     "prepare:vite": "cd vite && npm i",
     "prepare:rollup": "cd rollup && npm i",
     "prepare:webpack": "cd webpack && npm i",
+    "prepare:typescript": "cd typescript && npm i",
     "postversion": "sync_versions"
   },
   "keywords": [
@@ -28,5 +30,8 @@
   "devDependencies": {
     "@linkurious/code-tools": "^0.0.14",
     "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "@linkurious/ogma": "^4.4.3-develop.262"
   }
 }
