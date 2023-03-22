@@ -11,12 +11,10 @@
     "build:vite": "cd vite && npm run build",
     "build:rollup": "cd rollup && npm run build",
     "build:webpack": "cd webpack && npm run build",
-    "prepare": "concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\"",
+    "prepare": "node scripts/prepare.js && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" && node scripts/cleanup.js",
     "prepare:vite": "cd vite && npm i",
     "prepare:rollup": "cd rollup && npm i",
     "prepare:webpack": "cd webpack && npm i",
-    "preprepare": "node scripts/prepare.js",
-    "postprepare": "node scripts/cleanup.js",
     "postversion": "sync_versions"
   },
   "keywords": [
