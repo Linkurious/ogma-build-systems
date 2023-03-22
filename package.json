@@ -8,11 +8,15 @@
   },
   "scripts": {
     "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\"",
-    "prebuild": "node scripts/prepare.js",
-    "postbuild": "node scripts/cleanup.js",
-    "build:vite": "cd vite && npm i && npm run build",
-    "build:rollup": "cd rollup && npm i && npm run build",
-    "build:webpack": "cd webpack && npm i && npm run build",
+    "build:vite": "cd vite && npm run build",
+    "build:rollup": "cd rollup && npm run build",
+    "build:webpack": "cd webpack && npm run build",
+    "prepare": "concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\"",
+    "prepare:vite": "cd vite && npm i",
+    "prepare:rollup": "cd rollup && npm i",
+    "prepare:webpack": "cd webpack && npm i",
+    "preprepare": "node scripts/prepare.js",
+    "postprepare": "node scripts/cleanup.js",
     "postversion": "sync_versions"
   },
   "keywords": [
