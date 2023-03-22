@@ -5,8 +5,8 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -f umd -w",
-    "start": "npm-run-all --parallel server watch",
-    "server": "serve public"
+    "start": "npm-run-all --parallel serve watch",
+    "serve": "serve public"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "17.1.0",
