@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js"
   },
   "dependencies": {
-    "@linkurious/ogma": "^4.4.3-develop.262"
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/4.4.2/?secret=YOUR_API_KEY"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
