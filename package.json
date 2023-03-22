@@ -7,7 +7,12 @@
     "access": "public"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run prepare && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" && npm run cleanup",
+    "prepare": "node scripts/prepare.js",
+    "cleanup": "node scripts/cleanup.js",
+    "build:vite": "cd vite && npm i && npm run build",
+    "build:rollup": "cd rollup && npm i && npm run build",
+    "build:webpack": "cd webpack && npm i && npm run build",
     "postversion": "sync_versions"
   },
   "keywords": [
@@ -19,6 +24,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@linkurious/code-tools": "^0.0.14"
+    "@linkurious/code-tools": "^0.0.14",
+    "concurrently": "^7.6.0"
   }
 }
