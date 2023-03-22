@@ -4,14 +4,13 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
-  },
-  "dependencies": {
-    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/4.4.2/?secret=YOUR_API_KEY"
+    "build": "webpack --config webpack.prod.js",
+    "serve": "serve dist"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "serve": "^14.2.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.2",
     "webpack": "^5.76.2",
