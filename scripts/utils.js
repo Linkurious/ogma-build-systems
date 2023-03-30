@@ -9,8 +9,8 @@ const { ogmaVersion, placeholder, templates } = JSON.parse(
 
 /**
  * Utility function replacing Ogma version in `package.json`
- * @param {*} filename
- * @param {*} version
+ * @param {string} filename
+ * @param {string} version
  */
 const replaceOgmaVersion = (filename, version) => {
   // Read the contents of the file

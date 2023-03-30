@@ -1,0 +1,14 @@
+{
+  "name": "ogma-template-node",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "build": "node src/index.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/4.4.3/?secret=YOUR_API_KEY"
+  }
+}
