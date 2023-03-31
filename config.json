@@ -1,5 +1,5 @@
 {
-  "ogmaVersion": "4.4.3-PR-3314.1",
+  "ogmaVersion": "4.4.3-develop.4",
   "placeholder": "https://get.linkurio.us/api/get/npm/ogma/4.4.3/?secret=YOUR_API_KEY",
   "templates": ["rollup", "vite", "webpack", "typescript", "node"]
 }
