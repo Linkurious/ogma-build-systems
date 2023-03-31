@@ -1,1 +1,6 @@
 node_modules
+node/package-lock.json
+typescript/package-lock.json
+webpack/package-lock.json
+rollup/package-lock.json
+vite/package-lock.json

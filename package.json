@@ -6,17 +6,22 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": "18.14.2"
+  },
   "scripts": {
     "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\"",
     "build:vite": "cd vite && npm run build",
     "build:rollup": "cd rollup && npm run build",
     "build:webpack": "cd webpack && npm run build",
     "build:typescript": "cd typescript && npm run build",
-    "prepare": "node scripts/prepare.js && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" && node scripts/cleanup.js",
+    "build:node": "cd node && npm run build",
+    "prepare": "node scripts/prepare.js && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" \"npm run prepare:node\" && node scripts/cleanup.js",
     "prepare:vite": "cd vite && npm i",
     "prepare:rollup": "cd rollup && npm i",
     "prepare:webpack": "cd webpack && npm i",
     "prepare:typescript": "cd typescript && npm i",
+    "prepare:node": "cd node && npm i",
     "postversion": "sync_versions"
   },
   "keywords": [
@@ -32,6 +37,6 @@
     "concurrently": "^7.6.0"
   },
   "dependencies": {
-    "@linkurious/ogma": "^4.4.3-develop.262"
+    "@linkurious/ogma": "4.4.3-develop.4"
   }
 }
