@@ -40,6 +40,15 @@ $ cd my-webpack-project
 $ npm install # or yarn install
 ```
 
+```sh
+# node.js template
+$ npx degit Linkurious/ogma-build-systems/node my-node-project
+$ cd my-node-project
+$ npm install # or yarn install
+$ npm run build
+```
+
+
 ## 👀 I don't see a template that matches my need?
 
 You wish there was a template with your favorite library? Feel free to make a pull request. Copy one of the template already available, tweak it, name it properly and make a PR.
