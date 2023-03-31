@@ -34,7 +34,7 @@
   "license": "ISC",
   "devDependencies": {
     "@linkurious/code-tools": "^0.0.14",
-    "concurrently": "^7.6.0"
+    "concurrently": "^8.0.0"
   },
   "dependencies": {
     "@linkurious/ogma": "4.4.3-develop.4"
