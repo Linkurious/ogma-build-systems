@@ -1,0 +1,17 @@
+{
+  "name": "ogma-template-parcel",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npx parcel src/index.html",
+    "dev": "npx parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/4.4.3/?secret=YOUR_API_KEY"
+  }
+}
