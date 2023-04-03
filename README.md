@@ -12,7 +12,7 @@ It is _work in progress_, we plan to add: TypeScript, Vite, Rollup and Webpack t
 
 These templates are meant to be used as is via the [degit](https://github.com/Rich-Harris/degit) utility.
 
-## <img src="images/typescript.svg" height="2em" /> TypeScript
+## <img src="images/typescript.svg" height="40" /> TypeScript
 
 ```sh
 # TypeScript template
@@ -21,7 +21,7 @@ $ cd my-typescript-project
 $ npm install # or yarn install
 ```
 
-## <img src="images/vite.svg" height="2em" /> Vite
+## <img src="images/vite.svg" height="40" /> Vite
 
 ```sh
 # Vite template
@@ -30,7 +30,7 @@ $ cd my-vite-project
 $ npm install # or yarn install
 ```
 
-## <img src="images/rollup.svg" height="2em" /> Rollup
+## <img src="images/rollup.svg" height="40" /> Rollup
 
 ```sh
 # Rollup template
@@ -39,7 +39,7 @@ $ cd my-rollup-project
 $ npm install # or yarn install
 ```
 
-## <img src="images/webpack.svg" height="2em" /> Webpack
+## <img src="images/webpack.svg" height="40" /> Webpack
 
 ```sh
 # Webpack template
@@ -48,7 +48,7 @@ $ cd my-webpack-project
 $ npm install # or yarn install
 ```
 
-## <img src="images/node.svg" height="2em" /> Node.js
+## <img src="images/node.svg" height="40" /> Node.js
 
 ```sh
 # node.js template
@@ -58,7 +58,7 @@ $ npm install # or yarn install
 $ npm run build
 ```
 
-## <img src="images/parcel.svg" height="2em" /> Parcel
+## <img src="images/parcel.svg" height="40" /> Parcel
 
 ```sh
 # Parcel template
