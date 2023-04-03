@@ -12,12 +12,16 @@ It is _work in progress_, we plan to add: TypeScript, Vite, Rollup and Webpack t
 
 These templates are meant to be used as is via the [degit](https://github.com/Rich-Harris/degit) utility.
 
+## <img src="images/typescript.svg" height="40" /> TypeScript
+
 ```sh
 # TypeScript template
 $ npx degit Linkurious/ogma-build-systems/typescript my-typescript-project
 $ cd my-typescript-project
 $ npm install # or yarn install
 ```
+
+## <img src="images/vite.svg" height="40" /> Vite
 
 ```sh
 # Vite template
@@ -26,6 +30,8 @@ $ cd my-vite-project
 $ npm install # or yarn install
 ```
 
+## <img src="images/rollup.svg" height="40" /> Rollup
+
 ```sh
 # Rollup template
 $ npx degit Linkurious/ogma-build-systems/rollup my-rollup-project
@@ -33,12 +39,16 @@ $ cd my-rollup-project
 $ npm install # or yarn install
 ```
 
+## <img src="images/webpack.svg" height="40" /> Webpack
+
 ```sh
 # Webpack template
 $ npx degit Linkurious/ogma-build-systems/webpack my-webpack-project
 $ cd my-webpack-project
 $ npm install # or yarn install
 ```
+
+## <img src="images/node.svg" height="40" /> Node.js
 
 ```sh
 # node.js template
@@ -48,6 +58,15 @@ $ npm install # or yarn install
 $ npm run build
 ```
 
+## <img src="images/parcel.svg" height="40" /> Parcel
+
+```sh
+# Parcel template
+$ npx degit Linkurious/ogma-build-systems/parcel my-parcel-project
+$ cd my-parcel-project
+$ npm install # or yarn install
+$ npm run build
+```
 
 ## 👀 I don't see a template that matches my need?
 

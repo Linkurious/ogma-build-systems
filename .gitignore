@@ -5,3 +5,4 @@ webpack/package-lock.json
 rollup/package-lock.json
 vite/package-lock.json
 .parcel-cache
+.DS_Store
