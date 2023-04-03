@@ -7,7 +7,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "types": ["vite/client"],
     "noEmit": true,
     "isolatedModules": true
   }
