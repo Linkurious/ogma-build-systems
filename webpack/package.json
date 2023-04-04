@@ -1,0 +1,23 @@
+{
+  "name": "ogma-template-webpack",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "serve": "serve dist"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "serve": "^14.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.1"
+  },
+  "dependencies": {
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/4.4.3/?secret=YOUR_API_KEY"
+  }
+}

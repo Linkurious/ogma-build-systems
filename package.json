@@ -6,8 +6,24 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": "18.15.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\"  \"npm run build:node\" \"npm run build:parcel\"",
+    "build:vite": "cd vite && npm run build",
+    "build:rollup": "cd rollup && npm run build",
+    "build:webpack": "cd webpack && npm run build",
+    "build:typescript": "cd typescript && npm run build",
+    "build:node": "cd node && npm run build",
+    "build:parcel": "cd parcel && npm run build",
+    "prepare": "node scripts/prepare.js && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" \"npm run prepare:node\" \"npm run prepare:parcel\" && node scripts/cleanup.js",
+    "prepare:vite": "cd vite && npm i",
+    "prepare:rollup": "cd rollup && npm i",
+    "prepare:webpack": "cd webpack && npm i",
+    "prepare:typescript": "cd typescript && npm i",
+    "prepare:node": "cd node && npm i",
+    "prepare:parcel": "cd parcel && npm i",
     "postversion": "sync_versions"
   },
   "keywords": [
@@ -19,6 +35,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@linkurious/code-tools": "^0.0.14"
+    "@linkurious/code-tools": "^0.0.14",
+    "concurrently": "^8.0.0"
+  },
+  "dependencies": {
+    "@linkurious/ogma": "4.4.3-develop.4"
   }
 }

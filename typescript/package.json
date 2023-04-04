@@ -1,0 +1,26 @@
+{
+  "name": "ogma-template-typescript",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "run-s watch",
+    "build": "run-s build:*",
+    "serve": "browser-sync start -s \"public\" -f \"public\"",
+    "build:assets": "copyfiles -u 1 \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" public",
+    "build:tsc": "tsc",
+    "watch:tsc": "tsc -w",
+    "watch:scss": "onchange \"src/**/*.scss\" -- run-s build:scss",
+    "watch:assets": "onchange \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" -- run-s build:assets",
+    "watch": "run-p serve watch:*"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.0",
+    "copyfiles": "^2.0.0",
+    "npm-run-all": "^4.0.0",
+    "onchange": "^7.0.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/4.4.3/?secret=YOUR_API_KEY"
+  }
+}
