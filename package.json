@@ -39,6 +39,6 @@
     "concurrently": "^8.0.0"
   },
   "dependencies": {
-    "@linkurious/ogma": "4.4.3-develop.262"
+    "@linkurious/ogma": "4.4.4"
   }
 }
