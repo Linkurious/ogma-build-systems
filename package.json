@@ -6,9 +6,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": "18.16.0"
-  },
   "scripts": {
     "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\"  \"npm run build:node\" \"npm run build:parcel\"",
     "build:vite": "cd vite && npm run build",
@@ -23,7 +20,7 @@
     "prepare:webpack": "cd webpack && npm i",
     "prepare:typescript": "cd typescript && npm i",
     "prepare:node": "cd node && npm i",
-    "prepare:parcel": "cd parcel && npm i",
+    "prepare:parcel": "cd parcel && npm i --ignore-scripts",
     "postversion": "sync_versions"
   },
   "keywords": [
