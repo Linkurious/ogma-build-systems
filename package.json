@@ -36,6 +36,6 @@
     "concurrently": "^8.0.0"
   },
   "dependencies": {
-    "@linkurious/ogma": "4.4.5"
+    "@linkurious/ogma": "4.5.0"
   }
 }
