@@ -20,7 +20,7 @@
     "prepare:webpack": "cd webpack && npm i",
     "prepare:typescript": "cd typescript && npm i",
     "prepare:node": "cd node && npm i",
-    "prepare:parcel": "cd parcel && npm i",
+    "prepare:parcel": "cd parcel && npm i --ignore-scripts",
     "postversion": "sync_versions"
   },
   "keywords": [
