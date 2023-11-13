@@ -1,6 +1,6 @@
 {
   "name": "@linkurious/ogma-build-systems",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Build system templates for Ogma.",
   "main": "index.js",
   "publishConfig": {
