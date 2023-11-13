@@ -1,6 +1,6 @@
 {
   "name": "@linkurious/ogma-build-systems",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Build system templates for Ogma.",
   "main": "index.js",
   "publishConfig": {
@@ -23,7 +23,7 @@
     "prepare:webpack": "cd webpack && npm i",
     "prepare:typescript": "cd typescript && npm i",
     "prepare:node": "cd node && npm i",
-    "prepare:parcel": "cd parcel && npm i",
+    "prepare:parcel": "cd parcel && npm i --ignore-scripts",
     "postversion": "sync_versions"
   },
   "keywords": [
@@ -39,6 +39,6 @@
     "concurrently": "^8.0.0"
   },
   "dependencies": {
-    "@linkurious/ogma": "4.4.3-develop.4"
+    "@linkurious/ogma": "4.5.4"
   }
 }
