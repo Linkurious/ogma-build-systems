@@ -1,4 +1,4 @@
-const { root, templates, replaceOgmaVersion, ogmaVersion } = require("./utils");
+import { root, templates, replaceOgmaVersion, ogmaVersion } from "./utils.mjs";
 
 // Replace
 templates.forEach((template) => {

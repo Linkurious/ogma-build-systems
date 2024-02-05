@@ -1,9 +1,13 @@
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
-const root = (...paths) => path.join(__dirname, "../", ...paths);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const { ogmaVersion, placeholder, templates } = JSON.parse(
+export const root = (...paths) => path.join(__dirname, "../", ...paths);
+
+export const { ogmaVersion, placeholder, templates } = JSON.parse(
   fs.readFileSync(root("./config.json"), "utf-8")
 );
 
@@ -12,7 +16,7 @@ const { ogmaVersion, placeholder, templates } = JSON.parse(
  * @param {string} filename
  * @param {string} version
  */
-const replaceOgmaVersion = (filename, version) => {
+export const replaceOgmaVersion = (filename, version) => {
   // Read the contents of the file
   const content = fs.readFileSync(filename, "utf-8");
 
@@ -24,12 +28,4 @@ const replaceOgmaVersion = (filename, version) => {
 
   // Write the updated contents back to the file
   fs.writeFileSync(filename, newContent);
-};
-
-module.exports = {
-  root,
-  ogmaVersion,
-  placeholder,
-  templates,
-  replaceOgmaVersion,
 };

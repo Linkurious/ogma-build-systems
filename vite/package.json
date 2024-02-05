@@ -13,6 +13,6 @@
     "vite": "^4.2.1"
   },
   "dependencies": {
-    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/4.4.3/?secret=YOUR_API_KEY"
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/5.0.1/?secret=YOUR_API_KEY"
   }
 }
