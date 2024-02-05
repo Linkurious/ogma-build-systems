@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "rollup -c --configPlugin typescript",
-    "watch": "rollup -c -f umd -w",
+    "watch": "rollup -c --configPlugin typescript -f umd -w",
     "start": "npm-run-all --parallel serve watch",
     "serve": "serve public"
   },
