@@ -14,7 +14,7 @@
     "watch": "run-p serve watch:*"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.0",
+    "browser-sync": "^3.0.0",
     "copyfiles": "^2.0.0",
     "npm-run-all": "^4.0.0",
     "onchange": "^7.0.0",
