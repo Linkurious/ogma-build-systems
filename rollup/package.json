@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --configPlugin typescript",
     "watch": "rollup -c -f umd -w",
     "start": "npm-run-all --parallel serve watch",
     "serve": "serve public"
