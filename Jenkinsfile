@@ -2,7 +2,7 @@
 
 nodeJob {
   projectName = "linkurious/ogma-build-systems"
-  createGitTag = true
+  createGitTag = false
   runUnitTests = false
   runE2eTests = false
   gitTagPrefix = 'v'
