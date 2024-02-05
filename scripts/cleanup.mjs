@@ -1,5 +1,5 @@
-const fs = require("fs");
-const { root, templates, replaceOgmaVersion, placeholder } = require("./utils");
+import * as fs from "fs";
+import { root, templates, replaceOgmaVersion, placeholder } from "./utils.mjs";
 
 // Replace
 templates.forEach((template) => {

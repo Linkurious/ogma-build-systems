@@ -1,8 +1,7 @@
 {
   "name": "@linkurious/ogma-build-systems",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Build system templates for Ogma.",
-  "main": "index.js",
   "publishConfig": {
     "access": "public"
   },
@@ -17,7 +16,7 @@
     "build:typescript": "cd typescript && npm run build",
     "build:node": "cd node && npm run build",
     "build:parcel": "cd parcel && npm run build",
-    "prepare": "node scripts/prepare.js && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" \"npm run prepare:node\" \"npm run prepare:parcel\" && node scripts/cleanup.js",
+    "prepare": "node scripts/prepare.mjs && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" \"npm run prepare:node\" \"npm run prepare:parcel\" && node scripts/cleanup.mjs",
     "prepare:vite": "cd vite && npm i",
     "prepare:rollup": "cd rollup && npm i",
     "prepare:webpack": "cd webpack && npm i",
@@ -39,6 +38,6 @@
     "concurrently": "^8.0.0"
   },
   "dependencies": {
-    "@linkurious/ogma": "4.6.6"
+    "@linkurious/ogma": "5.0.1"
   }
 }
