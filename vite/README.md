@@ -8,6 +8,13 @@ This repository holds Vite template for Ogma. To learn more about how to use it,
 
 **Requirements :** [NPM](https://npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
+### Download this boilerplate
+
+```sh
+npx degit Linkurious/ogma-build-systems/vite ogma-vite-project
+cd ogma-vite-project
+```
+
 Before running this example, please replace `YOUR_ACCESS_KEY` with your API key (which you can get from [here](https://get.linkurio.us)) in package.json.
 
 Then, install node dependencies using `npm i`.

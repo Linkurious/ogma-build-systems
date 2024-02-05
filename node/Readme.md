@@ -8,6 +8,13 @@ This repository holds Node.js template for Ogma. To learn more about how to use 
 
 **Requirements :** [NPM](https://npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
+### Download this boilerplate
+
+```sh
+npx degit Linkurious/ogma-build-systems/node ogma-node-project
+cd ogma-node-project
+```
+
 Before running this example, please replace `YOUR_ACCESS_KEY` with your API key (which you can get from [here](https://get.linkurio.us)) in `package.json`. You will need `node-canvas` for the PNG export and `xmldom` for SVG export.
 
 In this example, you can install them using `npm i`.

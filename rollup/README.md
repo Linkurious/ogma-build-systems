@@ -8,6 +8,13 @@ This repository holds Rollup template for Ogma. To learn more about how to use i
 
 **Requirements :** [NPM](https://npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
+### Download this boilerplate
+
+```sh
+npx degit Linkurious/ogma-build-systems/rollup ogma-rollup-project
+cd ogma-rollup-project
+```
+
 Before running this example, please replace `YOUR_ACCESS_KEY` with your API key (which you can get from [here](https://get.linkurio.us)) in package.json.
 
 Then, install node dependencies using `npm i`.
