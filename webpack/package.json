@@ -15,7 +15,7 @@
     "typescript": "^5.0.2",
     "webpack": "^5.76.2",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.1"
+    "webpack-dev-server": "^5.0.0"
   },
   "dependencies": {
     "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/5.0.1/?secret=YOUR_API_KEY"
