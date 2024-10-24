@@ -13,7 +13,7 @@
     "@rollup/plugin-image": "3.0.3",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-typescript": "11.1.6",
-    "npm-run-all2": "6.2.6",
+    "npm-run-all2": "7.0.1",
     "rollup": "4.24.0",
     "serve": "14.2.3",
     "tslib": "2.6.3",
