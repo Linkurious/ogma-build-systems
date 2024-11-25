@@ -1,7 +1,10 @@
-const Ogma = require("@linkurious/ogma");
-const fs = require("fs");
-const Canvas = require("canvas");
+import fs from "fs";
+import Canvas from "canvas";
 Canvas.registerFont("./assets/iosevka-semibold.ttf", { family: "Iosevka" });
+
+import xmldom from "@xmldom/xmldom";
+import Ogma from "@linkurious/ogma";
+Ogma.libraries["@xmldom/xmldom"] = xmldom;
 
 const ogma = new Ogma();
 const background = "#3D5467";
@@ -65,9 +68,9 @@ ogma
     // eslint-disable-next-line no-console
     console.log(" - graph.png saved");
   })
-  .then(() => ogma.export.svg({ download: false, background, clip: true }))
-  .then((svg) => {
-    fs.writeFileSync("graph.svg", svg);
-    // eslint-disable-next-line no-console
-    console.log(" - graph.svg saved");
-  });
+  .then(() => ogma.export.svg({ download: false, background, clip: true }));
+//   .then((svg) => {
+//     fs.writeFileSync("graph.svg", svg);
+//     // eslint-disable-next-line no-console
+//     console.log(" - graph.svg saved");
+//   });

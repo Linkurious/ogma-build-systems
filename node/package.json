@@ -2,6 +2,7 @@
   "name": "ogma-template-node",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "main": "./src/index.js",
   "scripts": {
     "build": "node src/index.js"
@@ -9,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.6.1",
-    "xmldom": "^0.6.0",
-    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/5.0.1/?secret=YOUR_API_KEY"
+    "@xmldom/xmldom": "^0.7.5"
   }
 }
