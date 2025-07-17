@@ -6,7 +6,7 @@
     "access": "public"
   },
   "engines": {
-    "node": "22.16.0"
+    "node": "22.17.1"
   },
   "scripts": {
     "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\"  \"npm run build:node\" \"npm run build:parcel\"",
