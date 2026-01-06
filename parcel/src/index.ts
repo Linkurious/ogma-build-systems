@@ -1,4 +1,4 @@
-import Ogma, { Color, Node } from "@linkurious/ogma";
+import { Ogma, type Color, type Node } from "@linkurious/ogma";
 
 const ogma = new Ogma({ container: "graph-container" });
 
