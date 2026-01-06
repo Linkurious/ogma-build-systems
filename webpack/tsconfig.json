@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "outDir": "./dist/",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "skipLibCheck": true
   }
 }
