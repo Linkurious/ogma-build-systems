@@ -15,6 +15,7 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    fallback: { module: false }
   },
   output: {
     filename: "bundle.[hash].js",
