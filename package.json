@@ -59,9 +59,7 @@
     "mri": "^1.2.0",
     "picocolors": "^1.1.1",
     "tsdown": "^0.11.0",
-    "vitest": "^4.1.1"
-  },
-  "dependencies": {
+    "vitest": "^4.1.1",
     "@linkurious/ogma": ">=6.0.0"
   }
 }
