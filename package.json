@@ -27,7 +27,7 @@
     "build:typescript": "cd templates/typescript && npm run build",
     "build:node": "cd templates/node && npm run build",
     "build:parcel": "cd templates/parcel && npm run build",
-    "pretest": "node scripts/prepare.mjs && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" \"npm run prepare:node\" \"npm run prepare:parcel\" && node scripts/cleanup.mjs",
+    "prepare": "node scripts/prepare.mjs && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" \"npm run prepare:node\" \"npm run prepare:parcel\" && node scripts/cleanup.mjs",
     "prepare:vite": "cd templates/vite && npm i",
     "prepare:rollup": "cd templates/rollup && npm i",
     "prepare:webpack": "cd templates/webpack && npm i",
