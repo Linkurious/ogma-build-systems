@@ -1,4 +1,4 @@
-const Ogma = require("@linkurious/ogma");
+const { Ogma } = require("@linkurious/ogma");
 const fs = require("fs");
 const Canvas = require("canvas");
 Canvas.registerFont("./assets/iosevka-semibold.ttf", { family: "Iosevka" });
@@ -55,7 +55,7 @@ ogma
     console.log(
       `Exporting: ${view.width}x${view.height}px, center: ${view.x}, ${
         view.y
-      }, zoom: ${view.zoom.toFixed(2)}`
+      }, zoom: ${view.zoom.toFixed(2)}`,
     );
   })
   .then(() => ogma.export.png({ download: false, background }))
