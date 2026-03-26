@@ -2,15 +2,21 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
-import { scaffold, TEMPLATES, ogmaUrl } from '../src/scaffold.ts'
+import { scaffold, TEMPLATES, ogmaUrl } from "../src/scaffold.ts";
+import { ogmaVersion } from "../scripts/utils.mjs";
 
 const API_KEY = "test-api-key-123";
-const OGMA_VERSION = "5.3.8";
+// read ogma version from npm ls output in console;
+const OGMA_VERSION = ogmaVersion;
+
+console.log(`Using Ogma version ${OGMA_VERSION} for testing`);
 
 let tmpDir: string;
 
 beforeEach(async () => {
-  tmpDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "ogma-create-test-"));
+  tmpDir = await fs.promises.mkdtemp(
+    path.join(os.tmpdir(), "ogma-create-test-"),
+  );
 });
 
 afterEach(async () => {
@@ -67,7 +73,9 @@ describe("scaffold", () => {
         const projectName = `my-${template}-project`;
         const targetDir = path.join(tmpDir, projectName);
         await scaffold({ template, projectName, apiKey: API_KEY, targetDir });
-        const pkg = JSON.parse(fs.readFileSync(path.join(targetDir, "package.json"), "utf-8"));
+        const pkg = JSON.parse(
+          fs.readFileSync(path.join(targetDir, "package.json"), "utf-8"),
+        );
         expect(pkg.name).toBe(projectName);
       });
 
@@ -79,7 +87,9 @@ describe("scaffold", () => {
           apiKey: API_KEY,
           targetDir,
         });
-        const pkg = JSON.parse(fs.readFileSync(path.join(targetDir, "package.json"), "utf-8"));
+        const pkg = JSON.parse(
+          fs.readFileSync(path.join(targetDir, "package.json"), "utf-8"),
+        );
         const ogmaDep = pkg.dependencies["@linkurious/ogma"];
         expect(ogmaDep).toContain(API_KEY);
         expect(ogmaDep).toBe(ogmaUrl(OGMA_VERSION, API_KEY));
@@ -93,7 +103,9 @@ describe("scaffold", () => {
           apiKey: API_KEY,
           targetDir,
         });
-        const pkg = JSON.parse(fs.readFileSync(path.join(targetDir, "package.json"), "utf-8"));
+        const pkg = JSON.parse(
+          fs.readFileSync(path.join(targetDir, "package.json"), "utf-8"),
+        );
         const ogmaDep = pkg.dependencies["@linkurious/ogma"];
         expect(ogmaDep).not.toContain("YOUR_API_KEY");
       });
@@ -118,9 +130,7 @@ describe("scaffold", () => {
           apiKey: API_KEY,
           targetDir,
         });
-        expect(fs.existsSync(path.join(targetDir, "node_modules"))).toBe(
-          false,
-        );
+        expect(fs.existsSync(path.join(targetDir, "node_modules"))).toBe(false);
       });
 
       it("does not copy dist/", async () => {

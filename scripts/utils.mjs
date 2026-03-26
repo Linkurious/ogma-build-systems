@@ -1,3 +1,4 @@
+import { execSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
@@ -7,9 +8,13 @@ const __dirname = path.dirname(__filename);
 
 export const root = (...paths) => path.join(__dirname, "../", ...paths);
 
-export const { ogmaVersion, placeholder, templates } = JSON.parse(
-  fs.readFileSync(root("./config.json"), "utf-8")
+export const { placeholder, templates } = JSON.parse(
+  fs.readFileSync(root("./config.json"), "utf-8"),
 );
+
+const ogmaData = execSync("npm ls @linkurious/ogma --json").toString();
+export const ogmaVersion =
+  JSON.parse(ogmaData).dependencies["@linkurious/ogma"].version;
 
 /**
  * Utility function replacing Ogma version in `package.json`
@@ -23,7 +28,7 @@ export const replaceOgmaVersion = (filename, version) => {
   // Replace the placeholder with a new string
   const newContent = content.replace(
     /"@linkurious\/ogma": "(.*)"/,
-    `"@linkurious/ogma": "${version}"`
+    `"@linkurious/ogma": "${version}"`,
   );
 
   // Write the updated contents back to the file
