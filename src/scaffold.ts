@@ -30,7 +30,7 @@ export async function scaffold({ template, projectName, apiKey, targetDir }: Sca
   // Recursive copy using native fs.cp (Node 22+)
   await fs.promises.cp(templateDir, targetDir, {
     recursive: true,
-    filter: (src) => {
+    filter: (src: string) => {
       const rel = path.relative(templateDir, src)
       return !rel.startsWith('node_modules') && !rel.startsWith('dist')
     },
@@ -46,7 +46,7 @@ export async function scaffold({ template, projectName, apiKey, targetDir }: Sca
   const pkgPath = path.join(targetDir, 'package.json')
   let pkgContent = fs.readFileSync(pkgPath, 'utf-8')
 
-  pkgContent = pkgContent.replace(PLACEHOLDER_RE, (match) => {
+  pkgContent = pkgContent.replace(PLACEHOLDER_RE, (match: string) => {
     const versionMatch = match.match(/ogma\/([^/]+)\//)
     const version = versionMatch ? versionMatch[1] : '5.3.8'
     return `"@linkurious/ogma": "${ogmaUrl(version, apiKey)}"`

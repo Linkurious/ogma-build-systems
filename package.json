@@ -4,23 +4,18 @@
   "description": "Create an Ogma project from a build system template.",
   "type": "module",
   "bin": {
-    "create-ogma": "index.js"
+    "create-ogma": "dist/index.js"
   },
   "files": [
-    "index.js",
     "dist",
     "templates"
   ],
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": "22.21.1"
-  },
   "scripts": {
-    "build": "tsdown src/index.ts --format esm",
-    "dev": "tsdown src/index.ts --format esm --watch",
-    "typecheck": "tsc",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:unit": "npm run test",
     "prepack": "bash scripts/prepack.sh",
@@ -52,14 +47,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@clack/prompts": "^1.1.0",
+    "@clack/prompts": "1.1.0",
     "@linkurious/code-tools": "^0.0.15",
+    "@linkurious/ogma": ">=6.0.0",
     "@types/node": "^22.0.0",
     "concurrently": "^9.0.0",
-    "mri": "^1.2.0",
-    "picocolors": "^1.1.1",
-    "tsdown": "^0.11.0",
-    "vitest": "^4.1.1",
-    "@linkurious/ogma": ">=6.0.0"
+    "mri": "1.2.0",
+    "picocolors": "1.1.1",
+    "typescript": "6.0.2",
+    "vitest": "^4.1.1"
   }
 }

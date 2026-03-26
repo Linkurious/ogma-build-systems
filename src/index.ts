@@ -28,10 +28,10 @@ async function main(): Promise<void> {
     const result = await p.text({
       message: 'Project name:',
       placeholder: 'my-ogma-app',
-      validate: (v) => (v.trim() ? undefined : 'Project name cannot be empty'),
+    validate: (v) => (v?.trim() ? undefined : 'Project name cannot be empty'),
     })
     if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
-    projectName = result
+    projectName = result as string
   }
 
   // Template
@@ -50,10 +50,10 @@ async function main(): Promise<void> {
   // API key
   const apiKeyResult = await p.password({
     message: `Ogma API key ${pc.dim('(from get.linkurio.us)')}:`,
-    validate: (v) => (v.trim() ? undefined : 'API key cannot be empty'),
+    validate: (v) => (v?.trim() ? undefined : 'API key cannot be empty'),
   })
   if (p.isCancel(apiKeyResult)) { p.cancel('Cancelled.'); process.exit(1) }
-  const apiKey = apiKeyResult
+  const apiKey = apiKeyResult as string
 
   const targetDir = path.resolve(process.cwd(), projectName)
 
