@@ -1,0 +1,9 @@
+# Dev/repo files not needed by consumers
+scripts
+test
+images
+Jenkinsfile
+.bumpversion.cfg
+.nvmrc
+.version
+config.json
