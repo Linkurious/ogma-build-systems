@@ -11,3 +11,5 @@ linkurious-create-ogma-*.tgz
 templates/rollup/public/bundle.js
 templates/rollup/public/bundle.js.map
 templates/typescript/public/index.js
+reports
+coverage

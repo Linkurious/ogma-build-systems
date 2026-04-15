@@ -8,16 +8,20 @@ This repository holds Webpack template for Ogma. To learn more about how to use 
 
 **Requirements :** [NPM](https://npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
-### Download this boilerplate
+### Create a new project
 
 ```sh
-npx degit Linkurious/ogma-build-systems/webpack ogma-webpack-project
-cd ogma-webpack-project
+npm create @linkurious/ogma my-app -- --template webpack
+cd my-app
 ```
 
-Before running this example, please replace `YOUR_ACCESS_KEY` with your API key (which you can get from [here](https://get.linkurio.us)) in package.json.
+The interactive prompt will ask for your Ogma API key (available at [get.linkurio.us](https://get.linkurio.us)).
 
-Then, install node dependencies using `npm i`.
+Then, install node dependencies:
+
+```sh
+npm install
+```
 
 ### Start development server
 
