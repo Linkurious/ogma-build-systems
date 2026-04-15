@@ -18,7 +18,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:unit": "npm run test",
-    "posttest": "npm run setup && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\"",
+    "e2e:templates": "npm run setup && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\"",
     "build:vite": "cd templates/vite && npm run build",
     "build:rollup": "cd templates/rollup && npm run build",
     "build:webpack": "cd templates/webpack && npm run build",
