@@ -8,7 +8,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.1/?secret=YOUR_API_KEY",
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.2/?secret=YOUR_API_KEY",
     "@xmldom/xmldom": "^0.9.5",
     "canvas": "^3.0.0"
   }
