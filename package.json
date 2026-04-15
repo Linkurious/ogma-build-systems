@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "postbuild": "node scripts/remove-prepare.mjs",
     "prepare": "node scripts/prepare.mjs && node scripts/install-templates.mjs && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\" && node scripts/cleanup.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
