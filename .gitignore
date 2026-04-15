@@ -1,5 +1,7 @@
 node_modules
 templates/node/package-lock.json
+templates/node/graph.png
+templates/node/graph.svg
 templates/typescript/package-lock.json
 templates/webpack/package-lock.json
 templates/rollup/package-lock.json
