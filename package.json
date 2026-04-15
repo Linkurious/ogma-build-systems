@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "compile": "node scripts/prepare.mjs && node scripts/install-templates.mjs && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\" && node scripts/cleanup.mjs",
+    "prepare": "node scripts/prepare.mjs && node scripts/install-templates.mjs && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\" && node scripts/cleanup.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:unit": "npm run test",
@@ -25,7 +25,6 @@
     "build:typescript": "cd templates/typescript && npm run build",
     "build:node": "cd templates/node && npm run build",
     "build:parcel": "cd templates/parcel && npm run build",
-    "prepare": "node scripts/prepare.mjs && node scripts/cleanup.mjs",
     "prepack": "node scripts/prepack.mjs",
     "setup-templates": "node scripts/prepare.mjs && concurrently \"npm run install:vite\" \"npm run install:rollup\" \"npm run install:webpack\" \"npm run install:typescript\" \"npm run install:node\" \"npm run install:parcel\" && node scripts/cleanup.mjs",
     "build-templates": "node scripts/prepare.mjs && node scripts/install-templates.mjs && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\" && node scripts/cleanup.mjs",
