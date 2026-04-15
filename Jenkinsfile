@@ -5,7 +5,7 @@ nodeJob {
   podTemplateNames = ['jnlp-agent-node']
   createGitTag = false
   runUnitTests = true
-  runE2eTests = false
+  runE2eTests = true
   gitTagPrefix = 'v'
   runBookeeping = true
   runNpmPublish = true
