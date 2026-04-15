@@ -6,6 +6,7 @@
     "build": "rollup -c --configPlugin typescript",
     "watch": "rollup -c --configPlugin typescript -f umd -w",
     "start": "npm-run-all --parallel serve watch",
+    "dev": "npm-run-all --parallel serve watch",
     "serve": "serve public"
   },
   "devDependencies": {

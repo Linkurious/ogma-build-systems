@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "run-s watch",
+    "dev": "run-s watch",
     "build": "run-s build:*",
     "serve": "browser-sync start -s \"public\" -f \"public\"",
     "build:assets": "copyfiles -u 1 \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" public",

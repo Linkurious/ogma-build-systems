@@ -7,3 +7,8 @@ Jenkinsfile
 .nvmrc
 .version
 config.json
+
+# Template build artifacts (not needed in the published package)
+**/node_modules
+templates/*/dist
+templates/*/.parcel-cache
