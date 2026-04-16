@@ -32,6 +32,8 @@ describe("TEMPLATES", () => {
       "typescript",
       "node",
       "parcel",
+      "react",
+      "vue",
     ]);
   });
 });
