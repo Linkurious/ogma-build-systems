@@ -27,13 +27,13 @@ describe("TEMPLATES", () => {
   it("exports the expected list of templates", () => {
     expect(TEMPLATES).toEqual([
       "vite",
-      "webpack",
-      "rollup",
-      "typescript",
-      "node",
-      "parcel",
       "react",
       "vue",
+      "rollup",
+      "typescript",
+      "webpack",
+      "node",
+      "parcel",
     ]);
   });
 });
