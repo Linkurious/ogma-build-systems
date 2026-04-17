@@ -1,43 +1,67 @@
 {
-  "name": "@linkurious/ogma-build-systems",
-  "version": "0.0.3",
-  "description": "Build system templates for Ogma.",
+  "name": "@linkurious/create-ogma",
+  "version": "1.0.0",
+  "description": "Create an Ogma project from a build system template.",
+  "type": "module",
+  "bin": {
+    "create-ogma": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": "22.21.1"
-  },
   "scripts": {
-    "build": "concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\"  \"npm run build:node\" \"npm run build:parcel\"",
-    "build:vite": "cd vite && npm run build",
-    "build:rollup": "cd rollup && npm run build",
-    "build:webpack": "cd webpack && npm run build",
-    "build:typescript": "cd typescript && npm run build",
-    "build:node": "cd node && npm run build",
-    "build:parcel": "cd parcel && npm run build",
-    "prepare": "node scripts/prepare.mjs && concurrently \"npm run prepare:vite\" \"npm run prepare:rollup\" \"npm run prepare:webpack\" \"npm run prepare:typescript\" \"npm run prepare:node\" \"npm run prepare:parcel\" && node scripts/cleanup.mjs",
-    "prepare:vite": "cd vite && npm i",
-    "prepare:rollup": "cd rollup && npm i",
-    "prepare:webpack": "cd webpack && npm i",
-    "prepare:typescript": "cd typescript && npm i",
-    "prepare:node": "cd node && npm i",
-    "prepare:parcel": "cd parcel && npm i --ignore-scripts",
+    "build": "tsc",
+    "postbuild": "node scripts/remove-prepare.mjs",
+    "prepare": "node scripts/prepare.mjs && node scripts/install-templates.mjs && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\" \"npm run build:react\" \"npm run build:vue\" && node scripts/cleanup.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "npm run test",
+    "build:vite": "cd templates/vite && npm run build",
+    "build:rollup": "cd templates/rollup && npm run build",
+    "build:webpack": "cd templates/webpack && npm run build",
+    "build:typescript": "cd templates/typescript && npm run build",
+    "build:node": "cd templates/node && npm run build",
+    "build:parcel": "cd templates/parcel && npm run build",
+    "build:react": "cd templates/react && npm run build",
+    "build:vue": "cd templates/vue && npm run build",
+    "prepack": "node scripts/prepack.mjs",
+    "setup-templates": "node scripts/prepare.mjs && concurrently \"npm run install:vite\" \"npm run install:rollup\" \"npm run install:webpack\" \"npm run install:typescript\" \"npm run install:node\" \"npm run install:parcel\" \"npm run install:react\" \"npm run install:vue\" && node scripts/cleanup.mjs",
+    "build-templates": "node scripts/prepare.mjs && node scripts/install-templates.mjs && concurrently \"npm run build:vite\" \"npm run build:rollup\" \"npm run build:webpack\" \"npm run build:typescript\" \"npm run build:node\" \"npm run build:parcel\" \"npm run build:react\" \"npm run build:vue\" && node scripts/cleanup.mjs",
+    "install:vite": "cd templates/vite && npm i",
+    "install:rollup": "cd templates/rollup && npm i",
+    "install:webpack": "cd templates/webpack && npm i",
+    "install:typescript": "cd templates/typescript && npm i",
+    "install:node": "cd templates/node && npm i",
+    "install:parcel": "cd templates/parcel && npm i --ignore-scripts",
+    "install:react": "cd templates/react && npm i",
+    "install:vue": "cd templates/vue && npm i",
+    "prepublishOnly": "npm run build",
     "postversion": "sync_versions"
   },
   "keywords": [
     "ogma",
-    "webpack",
+    "create",
+    "template",
     "vite",
-    "template"
+    "webpack"
   ],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@linkurious/code-tools": "^0.0.15",
-    "concurrently": "^9.0.0"
-  },
   "dependencies": {
-    "@linkurious/ogma": "5.3.11"
+    "@clack/prompts": "1.1.0",
+    "mri": "1.2.0",
+    "picocolors": "1.1.1"
+  },
+  "devDependencies": {
+    "@linkurious/code-tools": "0.2.0",
+    "@linkurious/ogma": ">=6.0.2",
+    "@types/node": "^22.0.0",
+    "concurrently": "9.0.0",
+    "typescript": "6.0.2",
+    "vitest": "4.1.4"
   }
 }
