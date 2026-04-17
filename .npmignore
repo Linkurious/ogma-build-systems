@@ -1,0 +1,14 @@
+# Dev/repo files not needed by consumers
+scripts
+test
+images
+Jenkinsfile
+.bumpversion.cfg
+.nvmrc
+.version
+config.json
+
+# Template build artifacts (not needed in the published package)
+**/node_modules
+templates/*/dist
+templates/*/.parcel-cache

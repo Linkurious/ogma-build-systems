@@ -2,72 +2,46 @@
 
 ## 💡 Information
 
-This repository holds build system templates for Ogma.
-
-It is _work in progress_, we plan to add: TypeScript, Vite, Rollup and Webpack templates.
+This repository holds build system templates for [Ogma](https://linkurious.com/ogma/). Available templates: **Vite**, **Webpack**, **Rollup**, **TypeScript**, **Node.js**, **Parcel**.
 
 ## 🚀 Get started
 
-**Requirements :** [NPM](https://npmjs.com/) or [Yarn](https://yarnpkg.com/)
-
-These templates are meant to be used as is via the [degit](https://github.com/Rich-Harris/degit) utility.
-
-## <img src="images/typescript.svg" height="40" /> TypeScript
+**Requirements:** [Node.js](https://nodejs.org/) with npm
 
 ```sh
-# TypeScript template
-$ npx degit Linkurious/ogma-build-systems/typescript my-typescript-project
-$ cd my-typescript-project
-$ npm install # or yarn install
+npm create @linkurious/ogma my-app
 ```
 
-## <img src="images/vite.svg" height="40" /> Vite
+The interactive prompts will ask you to:
+
+1. Choose a template: `vite`, `webpack`, `rollup`, `typescript`, `node`, `parcel`
+2. Enter your Ogma API key (from [get.linkurio.us](https://get.linkurio.us))
+
+You can skip the template prompt by passing it as a flag:
 
 ```sh
-# Vite template
-$ npx degit Linkurious/ogma-build-systems/vite my-vite-project
-$ cd my-vite-project
-$ npm install # or yarn install
+npm create @linkurious/ogma my-app -- --template vite
 ```
 
-## <img src="images/rollup.svg" height="40" /> Rollup
+Then:
 
 ```sh
-# Rollup template
-$ npx degit Linkurious/ogma-build-systems/rollup my-rollup-project
-$ cd my-rollup-project
-$ npm install # or yarn install
+cd my-app
+npm install
+npm run dev
 ```
 
-## <img src="images/webpack.svg" height="40" /> Webpack
+## 📦 Templates
 
-```sh
-# Webpack template
-$ npx degit Linkurious/ogma-build-systems/webpack my-webpack-project
-$ cd my-webpack-project
-$ npm install # or yarn install
-```
-
-## <img src="images/node.svg" height="40" /> Node.js
-
-```sh
-# node.js template
-$ npx degit Linkurious/ogma-build-systems/node my-node-project
-$ cd my-node-project
-$ npm install # or yarn install
-$ npm run build
-```
-
-## <img src="images/parcel.svg" height="40" /> Parcel
-
-```sh
-# Parcel template
-$ npx degit Linkurious/ogma-build-systems/parcel my-parcel-project
-$ cd my-parcel-project
-$ npm install # or yarn install
-$ npm run build
-```
+| Template     | Description                            |
+| ------------ | -------------------------------------- |
+| `vite`       | TypeScript + Vite dev server           |
+| `webpack`    | TypeScript + Webpack 5                 |
+| `rollup`     | TypeScript + Rollup bundler            |
+| `typescript` | TypeScript + browser-sync (no bundler) |
+| `node`       | Node.js server-side rendering          |
+| `parcel`     | TypeScript + Parcel bundler            |
 
 ## 👀 I don't see a template that matches my need?
 
-You wish there was a template with your favorite library? Feel free to make a pull request. Copy one of the template already available, tweak it, name it properly and make a PR.
+You wish there was a template with your favorite library? Give us a note via [contact form](https://doc.linkurious.com/ogma/latest/contact.html).

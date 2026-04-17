@@ -2,9 +2,10 @@
 
 nodeJob {
   projectName = "linkurious/ogma-build-systems"
-  createGitTag = true
-  runUnitTests = false
-  runE2eTests = false
+  podTemplateNames = ['jnlp-agent-node']
+  createGitTag = false
+  runUnitTests = true
+  runE2eTests = true
   gitTagPrefix = 'v'
   runBookeeping = true
   runNpmPublish = true
