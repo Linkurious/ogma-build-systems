@@ -2,5 +2,24 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>Linkurious/renovate-config"
+  ],
+  "regexManagers": [
+    {
+      "description": "Keep @linkurious/ogma version in template package.json URLs in sync with the root package",
+      "fileMatch": ["^templates/[^/]+/package\\.json$"],
+      "matchStrings": [
+        "get\\.linkurio\\.us/api/get/npm/ogma/(?<currentValue>[^/]+)/\\?secret=YOUR_API_KEY"
+      ],
+      "depNameTemplate": "@linkurious/ogma",
+      "datasourceTemplate": "npm",
+      "registryUrlTemplate": "https://nexus3.linkurious.net/repository/npm/"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Group root and template @linkurious/ogma bumps into one PR",
+      "matchDepNames": ["@linkurious/ogma"],
+      "groupName": "@linkurious/ogma"
+    }
   ]
 }
