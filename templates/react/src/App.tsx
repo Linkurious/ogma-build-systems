@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import type { RawGraph } from '@linkurious/ogma';
-import { Ogma, NodeStyle, EdgeStyle } from '@linkurious/ogma-react';
+import { Ogma, NodeStyle, EdgeStyle, EventListener } from '@linkurious/ogma-react';
 
 const graph: RawGraph = {
   nodes: [
@@ -14,13 +15,33 @@ const graph: RawGraph = {
 };
 
 export default function App() {
+  const [selected, setSelected] = useState<string | null>(null);
+
   return (
-    <Ogma
-      graph={graph}
-      onReady={(ogma) => ogma.layouts.force({ locate: true })}
-    >
-      <NodeStyle attributes={{ color: '#61dafb', radius: 12 }} />
-      <EdgeStyle attributes={{ color: '#555' }} />
-    </Ogma>
+    <>
+      <Ogma
+        graph={graph}
+        onReady={(ogma) => ogma.layouts.force({ locate: true })}
+      >
+        <NodeStyle attributes={{ color: '#61dafb', radius: 12 }} />
+        <EdgeStyle attributes={{ color: '#555' }} />
+        <EventListener
+          event="click"
+          handler={(evt) => {
+            const node = evt.target?.isNode ? evt.target : null;
+            setSelected(node ? String(node.getAttribute('text') ?? node.getId()) : null);
+          }}
+        />
+      </Ogma>
+      {selected && (
+        <div style={{
+          position: 'fixed', bottom: 16, left: 16,
+          background: '#fff', padding: '8px 12px', borderRadius: 6,
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)', fontFamily: 'sans-serif',
+        }}>
+          Selected: <strong>{selected}</strong>
+        </div>
+      )}
+    </>
   );
 }
