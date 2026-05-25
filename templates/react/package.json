@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@linkurious/ogma": "6.0.2",
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.2/?secret=YOUR_API_KEY",
     "@linkurious/ogma-react": "latest",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
