@@ -53,13 +53,14 @@
   "license": "ISC",
   "dependencies": {
     "@clack/prompts": "1.5.1",
+    "fflate": "0.8.3",
     "mri": "1.2.0",
     "picocolors": "1.1.1"
   },
   "devDependencies": {
     "@linkurious/code-tools": "0.2.0",
     "@linkurious/ogma": ">=6.0.2",
-    "@types/node": "^22.0.0",
+    "@types/node": "22.19.21",
     "concurrently": "9.0.0",
     "typescript": "6.0.2",
     "vitest": "4.1.7"
