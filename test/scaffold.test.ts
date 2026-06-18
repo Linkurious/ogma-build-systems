@@ -2,7 +2,12 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
-import { scaffold, TEMPLATES, ogmaUrl } from "../src/scaffold.ts";
+import {
+  scaffold,
+  TEMPLATES,
+  ogmaUrl,
+  resolveOgmaVersion,
+} from "../src/scaffold.ts";
 import { ogmaVersion } from "../scripts/utils.mjs";
 
 const API_KEY = "test-api-key-123";
@@ -46,9 +51,57 @@ describe("ogmaUrl", () => {
   });
 });
 
+describe("resolveOgmaVersion", () => {
+  it("parses the version from a placeholder dependency URL", () => {
+    const pkg = JSON.stringify({
+      dependencies: {
+        "@linkurious/ogma":
+          "https://get.linkurio.us/api/get/npm/ogma/6.0.2/?secret=YOUR_API_KEY",
+      },
+    });
+    expect(resolveOgmaVersion(pkg)).toBe("6.0.2");
+  });
+
+  it("parses the version from an injected dependency URL", () => {
+    const pkg = JSON.stringify({
+      dependencies: {
+        "@linkurious/ogma":
+          "https://get.linkurio.us/api/get/npm/ogma/7.1.0/?secret=real-key",
+      },
+    });
+    expect(resolveOgmaVersion(pkg)).toBe("7.1.0");
+  });
+
+  it("ignores unrelated @linkurious/ogma-* dependencies", () => {
+    const pkg = JSON.stringify({
+      dependencies: {
+        "@linkurious/ogma":
+          "https://get.linkurio.us/api/get/npm/ogma/6.0.2/?secret=YOUR_API_KEY",
+        "@linkurious/ogma-react": "latest",
+      },
+    });
+    expect(resolveOgmaVersion(pkg)).toBe("6.0.2");
+  });
+
+  it("falls back to a default version when no match is found", () => {
+    expect(resolveOgmaVersion('{ "dependencies": {} }')).toBe("5.3.8");
+  });
+});
+
 describe("scaffold", () => {
   for (const template of TEMPLATES) {
     describe(`template: ${template}`, () => {
+      it("returns the resolved Ogma version", async () => {
+        const targetDir = path.join(tmpDir, `test-${template}`);
+        const result = await scaffold({
+          template,
+          projectName: `test-${template}`,
+          apiKey: API_KEY,
+          targetDir,
+        });
+        expect(result.ogmaVersion).toBe(OGMA_VERSION);
+      });
+
       it("creates the project directory", async () => {
         const targetDir = path.join(tmpDir, `test-${template}`);
         await scaffold({

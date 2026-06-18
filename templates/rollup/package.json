@@ -1,6 +1,6 @@
 {
   "name": "ogma-template-rollup",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "scripts": {
     "build": "rollup -c --configPlugin typescript",
@@ -10,17 +10,17 @@
     "serve": "serve public"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "29.0.0",
+    "@rollup/plugin-commonjs": "29.0.2",
     "@rollup/plugin-image": "3.0.3",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-typescript": "12.3.0",
-    "npm-run-all2": "8.0.4",
-    "rollup": "4.59.0",
-    "serve": "14.2.5",
+    "npm-run-all2": "9.0.2",
+    "rollup": "4.60.4",
+    "serve": "14.2.6",
     "tslib": "2.8.1",
     "typescript": "^5.0.2"
   },
   "dependencies": {
-    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.2/?secret=YOUR_API_KEY"
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.3/?secret=YOUR_API_KEY"
   }
 }

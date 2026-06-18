@@ -17,9 +17,22 @@ export const TEMPLATES = [
 export type Template = (typeof TEMPLATES)[number];
 
 const PLACEHOLDER_RE = /"@linkurious\/ogma":\s*"[^"]*YOUR_API_KEY[^"]*"/;
+const OGMA_VERSION_RE = /npm\/ogma\/([^/]+)\//;
+const DEFAULT_OGMA_VERSION = "5.3.8";
 
 export const ogmaUrl = (version: string, apiKey: string): string =>
   `https://get.linkurio.us/api/get/npm/ogma/${version}/?secret=${apiKey}`;
+
+/**
+ * Extract the Ogma version pinned in a template's `package.json` content.
+ * Works for both the `YOUR_API_KEY` placeholder URL and the injected URL,
+ * since both embed `npm/ogma/<version>/`. Falls back to a known-good version
+ * when no match is found.
+ */
+export const resolveOgmaVersion = (pkgContent: string): string => {
+  const match = pkgContent.match(OGMA_VERSION_RE);
+  return match ? match[1] : DEFAULT_OGMA_VERSION;
+};
 
 interface ScaffoldOptions {
   template: Template;
@@ -33,7 +46,7 @@ export async function scaffold({
   projectName,
   apiKey,
   targetDir,
-}: ScaffoldOptions): Promise<void> {
+}: ScaffoldOptions): Promise<{ ogmaVersion: string }> {
   // Templates live in templates/ at the package root (one level up from src/)
   const templateDir = path.join(__dirname, "..", "templates", template);
 
@@ -60,13 +73,16 @@ export async function scaffold({
   const pkgPath = path.join(targetDir, "package.json");
   let pkgContent = fs.readFileSync(pkgPath, "utf-8");
 
-  pkgContent = pkgContent.replace(PLACEHOLDER_RE, (match: string) => {
-    const versionMatch = match.match(/ogma\/([^/]+)\//);
-    const version = versionMatch ? versionMatch[1] : "5.3.8";
-    return `"@linkurious/ogma": "${ogmaUrl(version, apiKey)}"`;
-  });
+  const ogmaVersion = resolveOgmaVersion(pkgContent);
+
+  pkgContent = pkgContent.replace(
+    PLACEHOLDER_RE,
+    `"@linkurious/ogma": "${ogmaUrl(ogmaVersion, apiKey)}"`,
+  );
 
   const pkg = JSON.parse(pkgContent) as Record<string, unknown>;
   pkg.name = projectName;
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
+
+  return { ogmaVersion };
 }
