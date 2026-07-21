@@ -20,8 +20,18 @@ const PLACEHOLDER_RE = /"@linkurious\/ogma":\s*"[^"]*YOUR_API_KEY[^"]*"/;
 const OGMA_VERSION_RE = /npm\/ogma\/([^/]+)\//;
 const DEFAULT_OGMA_VERSION = "5.3.8";
 
+export const OGMA_REGISTRY =
+  "https://public-pull.nexus3.linkurious.net/repository/npm-public";
+
 export const ogmaUrl = (version: string, apiKey: string): string =>
   `https://get.linkurio.us/api/get/npm/ogma/${version}/?secret=${apiKey}`;
+
+/**
+ * Derive the OGMA_DOWNLOAD_KEY value expected by the private npm registry.
+ * The registry uses HTTP Basic Auth: base64("any:<secret>").
+ */
+export const deriveDownloadKey = (apiKey: string): string =>
+  Buffer.from(`any:${apiKey}`).toString("base64");
 
 /**
  * Extract the Ogma version pinned in a template's `package.json` content.
@@ -39,6 +49,9 @@ interface ScaffoldOptions {
   projectName: string;
   apiKey: string;
   targetDir: string;
+  /** When true, write an .npmrc pointing @linkurious at the private registry
+   *  and use a plain semver dep instead of embedding the secret in the URL. */
+  useNpmrc?: boolean;
 }
 
 export async function scaffold({
@@ -46,6 +59,7 @@ export async function scaffold({
   projectName,
   apiKey,
   targetDir,
+  useNpmrc = false,
 }: ScaffoldOptions): Promise<{ ogmaVersion: string }> {
   // Templates live in templates/ at the package root (one level up from src/)
   const templateDir = path.join(__dirname, "..", "templates", template);
@@ -69,16 +83,34 @@ export async function scaffold({
     fs.renameSync(gitignoreSrc, path.join(targetDir, ".gitignore"));
   }
 
-  // Patch package.json: set name and inject real Ogma URL
+  // Patch package.json: set name and inject Ogma dependency
   const pkgPath = path.join(targetDir, "package.json");
   let pkgContent = fs.readFileSync(pkgPath, "utf-8");
 
   const ogmaVersion = resolveOgmaVersion(pkgContent);
 
-  pkgContent = pkgContent.replace(
-    PLACEHOLDER_RE,
-    `"@linkurious/ogma": "${ogmaUrl(ogmaVersion, apiKey)}"`,
-  );
+  if (useNpmrc) {
+    // Use a plain semver dep — auth is handled by .npmrc
+    pkgContent = pkgContent.replace(
+      PLACEHOLDER_RE,
+      `"@linkurious/ogma": "${ogmaVersion}"`,
+    );
+
+    // Write .npmrc with ${OGMA_DOWNLOAD_KEY} placeholder (safe to commit)
+    const registryHost = new URL(OGMA_REGISTRY).host;
+    const registryPath = new URL(OGMA_REGISTRY).pathname;
+    fs.writeFileSync(
+      path.join(targetDir, ".npmrc"),
+      `@linkurious:registry=${OGMA_REGISTRY}\n` +
+        `//${registryHost}${registryPath}/:_auth=\${OGMA_DOWNLOAD_KEY}\n`,
+    );
+  } else {
+    // Default: embed the secret directly in the install URL
+    pkgContent = pkgContent.replace(
+      PLACEHOLDER_RE,
+      `"@linkurious/ogma": "${ogmaUrl(ogmaVersion, apiKey)}"`,
+    );
+  }
 
   const pkg = JSON.parse(pkgContent) as Record<string, unknown>;
   pkg.name = projectName;
