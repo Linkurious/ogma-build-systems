@@ -97,11 +97,13 @@ export async function scaffold({
     );
 
     // Write .npmrc with ${OGMA_DOWNLOAD_KEY} placeholder (safe to commit)
-    const registryHost = new URL(OGMA_REGISTRY).host;
-    const registryPath = new URL(OGMA_REGISTRY).pathname;
+    const registryUrl = OGMA_REGISTRY.endsWith("/") ? OGMA_REGISTRY : `${OGMA_REGISTRY}/`;
+    const registry = new URL(registryUrl);
+    const registryHost = registry.host;
+    const registryPath = registry.pathname.replace(/\/$/, "");
     fs.writeFileSync(
       path.join(targetDir, ".npmrc"),
-      `@linkurious:registry=${OGMA_REGISTRY}\n` +
+      `@linkurious:registry=${registryUrl}\n` +
         `//${registryHost}${registryPath}/:_auth=\${OGMA_DOWNLOAD_KEY}\n`,
     );
   } else {
