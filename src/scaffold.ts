@@ -28,10 +28,10 @@ export const ogmaUrl = (version: string, apiKey: string): string =>
 
 /**
  * Derive the OGMA_DOWNLOAD_KEY value expected by the private npm registry.
- * The registry uses HTTP Basic Auth: base64("any:<secret>").
+ * The registry uses HTTP Basic Auth: base64("<email>:<secret>").
  */
-export const deriveDownloadKey = (apiKey: string): string =>
-  Buffer.from(`any:${apiKey}`).toString("base64");
+export const deriveDownloadKey = (email: string, apiKey: string): string =>
+  Buffer.from(`${email}:${apiKey}`).toString("base64");
 
 /**
  * Extract the Ogma version pinned in a template's `package.json` content.

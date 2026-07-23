@@ -70,6 +70,17 @@ async function main(): Promise<void> {
     useNpmrc = result
   }
 
+  // Email is only needed to derive OGMA_DOWNLOAD_KEY when using .npmrc
+  let email = ''
+  if (useNpmrc) {
+    const result = await p.text({
+      message: `Email ${pc.dim('(your get.linkurio.us login email)')}:`,
+      validate: (v) => (v?.trim() ? undefined : 'Email cannot be empty'),
+    })
+    if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
+    email = result as string
+  }
+
   // Ogma AI coding skill (default yes; overridable with --skill / --no-skill)
   let installSkill: boolean
   if (typeof argv.skill === 'boolean') {
@@ -122,7 +133,7 @@ async function main(): Promise<void> {
     `  ${pc.cyan(`cd ${projectName}`)}\n` +
     (useNpmrc
       ? `  ${pc.dim('# set this in your shell, CI secret store, or .env (do not commit the value)')}\n` +
-        `  ${pc.cyan(`export OGMA_DOWNLOAD_KEY=${deriveDownloadKey(apiKey)}`)}\n`
+        `  ${pc.cyan(`export OGMA_DOWNLOAD_KEY=${deriveDownloadKey(email, apiKey)}`)}\n`
       : '') +
     `  ${pc.cyan('npm install')}\n` +
     `  ${pc.cyan('npm run dev')}`,
