@@ -1,6 +1,6 @@
 {
   "name": "@linkurious/create-ogma",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Create an Ogma project from a build system template.",
   "type": "module",
   "bin": {
