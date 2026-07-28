@@ -4,13 +4,13 @@ import path from 'node:path'
 import mri from 'mri'
 import * as p from '@clack/prompts'
 import pc from 'picocolors'
-import { scaffold, TEMPLATES, type Template } from './scaffold.js'
+import { scaffold, TEMPLATES, type Template, deriveDownloadKey } from './scaffold.js'
 import { downloadOgmaSkill } from './skill.js'
 
-const argv = mri<{ template?: string; t?: string; skill?: boolean }>(process.argv.slice(2), {
+const argv = mri<{ template?: string; t?: string; skill?: boolean; npmrc?: boolean }>(process.argv.slice(2), {
   alias: { t: 'template' },
   string: ['template'],
-  boolean: ['skill'],
+  boolean: ['skill', 'npmrc'],
 })
 
 async function main(): Promise<void> {
@@ -57,6 +57,30 @@ async function main(): Promise<void> {
   if (p.isCancel(apiKeyResult)) { p.cancel('Cancelled.'); process.exit(1) }
   const apiKey = apiKeyResult as string
 
+  // Optional: .npmrc registry auth (default no — most projects are private repos)
+  let useNpmrc: boolean
+  if (typeof argv.npmrc === 'boolean') {
+    useNpmrc = argv.npmrc
+  } else {
+    const result = await p.confirm({
+      message: `Generate ${pc.cyan('.npmrc')} for registry auth? ${pc.dim('(keeps secret out of package.json — useful for CI/shared repos)')}`,
+      initialValue: false,
+    })
+    if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
+    useNpmrc = result
+  }
+
+  // Email is only needed to derive OGMA_DOWNLOAD_KEY when using .npmrc
+  let email = ''
+  if (useNpmrc) {
+    const result = await p.text({
+      message: `Email ${pc.dim('(your get.linkurio.us login email)')}:`,
+      validate: (v) => (v?.trim() ? undefined : 'Email cannot be empty'),
+    })
+    if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
+    email = result as string
+  }
+
   // Ogma AI coding skill (default yes; overridable with --skill / --no-skill)
   let installSkill: boolean
   if (typeof argv.skill === 'boolean') {
@@ -82,7 +106,7 @@ async function main(): Promise<void> {
     fs.rmSync(targetDir, { recursive: true })
   }
 
-  const { ogmaVersion } = await scaffold({ template, projectName, apiKey, targetDir })
+  const { ogmaVersion } = await scaffold({ template, projectName, apiKey, targetDir, useNpmrc })
 
   let skillInstalled = false
   if (installSkill) {
@@ -107,6 +131,10 @@ async function main(): Promise<void> {
     (skillInstalled ? `\n${pc.dim('  Ogma AI skill ready in agents/skills/ogma-skill')}` : '') +
     `\n\n` +
     `  ${pc.cyan(`cd ${projectName}`)}\n` +
+    (useNpmrc
+      ? `  ${pc.dim('# set this in your shell, CI secret store, or .env (do not commit the value)')}\n` +
+        `  ${pc.cyan(`export OGMA_DOWNLOAD_KEY=${deriveDownloadKey(email, apiKey)}`)}\n`
+      : '') +
     `  ${pc.cyan('npm install')}\n` +
     `  ${pc.cyan('npm run dev')}`,
   )
