@@ -19,7 +19,7 @@
     "copyfiles": "^2.0.0",
     "npm-run-all2": "^9.0.0",
     "onchange": "^7.0.0",
-    "typescript": "^5.0.2"
+    "typescript": "^7.0.0"
   },
   "dependencies": {
     "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.3/?secret=YOUR_API_KEY"
