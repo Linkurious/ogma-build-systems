@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.3/?secret=YOUR_API_KEY",
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.6/?secret=YOUR_API_KEY",
     "solid-js": "^1.9.0"
   },
   "devDependencies": {
