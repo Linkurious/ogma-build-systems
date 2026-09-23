@@ -34,6 +34,7 @@ describe("TEMPLATES", () => {
       "vite",
       "react",
       "vue",
+      "solid",
       "rollup",
       "typescript",
       "webpack",
