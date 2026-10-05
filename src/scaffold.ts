@@ -8,6 +8,7 @@ export const TEMPLATES = [
   "vite",
   "react",
   "vue",
+  "solid",
   "rollup",
   "typescript",
   "webpack",

@@ -2,7 +2,7 @@
 
 ## 💡 Information
 
-This repository holds build system templates for [Ogma](https://linkurious.com/ogma/). Available templates: **Vite**, **Webpack**, **Rollup**, **TypeScript**, **Node.js**, **Parcel**.
+This repository holds build system templates for [Ogma](https://linkurious.com/ogma/). Available templates: **Vite**, **Webpack**, **Rollup**, **TypeScript**, **Node.js**, **Parcel**, **React**, **Vue**, **Solid**.
 
 ## 🚀 Get started
 
@@ -14,7 +14,7 @@ npm create @linkurious/ogma my-app
 
 The interactive prompts will ask you to:
 
-1. Choose a template: `vite`, `webpack`, `rollup`, `typescript`, `node`, `parcel`
+1. Choose a template: `vite`, `webpack`, `rollup`, `typescript`, `node`, `parcel`, `react`, `vue`, `solid`
 2. Enter your Ogma API key (from [get.linkurio.us](https://get.linkurio.us))
 3. Optionally download the [Ogma AI coding skill](https://doc.linkurious.com/ogma/latest/tutorials/ai-coding/) (defaults to **Yes**)
 
@@ -53,6 +53,9 @@ npm run dev
 | `typescript` | TypeScript + browser-sync (no bundler) |
 | `node`       | Node.js server-side rendering          |
 | `parcel`     | TypeScript + Parcel bundler            |
+| `react`      | React + Vite dev server                |
+| `vue`        | Vue 3 + Vite dev server                |
+| `solid`      | SolidJS + Vite dev server              |
 
 ## 👀 I don't see a template that matches my need?
 
