@@ -4,12 +4,12 @@ import path from 'node:path'
 import mri from 'mri'
 import * as p from '@clack/prompts'
 import pc from 'picocolors'
-import { scaffold, TEMPLATES, type Template, deriveDownloadKey } from './scaffold.js'
+import { scaffold, TEMPLATES, EDITIONS, type Template, type Edition, deriveDownloadKey, parseLicenseInput } from './scaffold.js'
 import { downloadOgmaSkill } from './skill.js'
 
-const argv = mri<{ template?: string; t?: string; skill?: boolean; npmrc?: boolean }>(process.argv.slice(2), {
+const argv = mri<{ template?: string; t?: string; edition?: string; skill?: boolean; npmrc?: boolean }>(process.argv.slice(2), {
   alias: { t: 'template' },
-  string: ['template'],
+  string: ['template', 'edition'],
   boolean: ['skill', 'npmrc'],
 })
 
@@ -20,6 +20,10 @@ async function main(): Promise<void> {
   const argTemplate = (argv.template ?? argv.t) as string | undefined
   const validTemplate = argTemplate && (TEMPLATES as readonly string[]).includes(argTemplate)
     ? (argTemplate as Template)
+    : undefined
+  const argEdition = argv.edition as string | undefined
+  const validEdition = argEdition && (EDITIONS as readonly string[]).includes(argEdition)
+    ? (argEdition as Edition)
     : undefined
 
   // Project name
@@ -49,36 +53,59 @@ async function main(): Promise<void> {
     template = result
   }
 
-  // API key
-  const apiKeyResult = await p.password({
-    message: `Ogma API key ${pc.dim('(from get.linkurio.us)')}:`,
-    validate: (v) => (v?.trim() ? undefined : 'API key cannot be empty'),
-  })
-  if (p.isCancel(apiKeyResult)) { p.cancel('Cancelled.'); process.exit(1) }
-  const apiKey = apiKeyResult as string
-
-  // Optional: .npmrc registry auth (default no — most projects are private repos)
-  let useNpmrc: boolean
-  if (typeof argv.npmrc === 'boolean') {
-    useNpmrc = argv.npmrc
+  // Edition
+  let edition: Edition
+  if (validEdition) {
+    edition = validEdition
   } else {
-    const result = await p.confirm({
-      message: `Generate ${pc.cyan('.npmrc')} for registry auth? ${pc.dim('(keeps secret out of package.json — useful for CI/shared repos)')}`,
-      initialValue: false,
-    })
+    const result = await p.select({
+      message: 'Edition:',
+      initialValue: 'trial' as Edition,
+      options: [
+        { value: 'trial', label: 'Trial', hint: 'free, watermarked, no key needed' },
+        { value: 'licensed', label: 'Licensed', hint: 'needs your get.linkurio.us key' },
+      ],
+    }) as Edition
     if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
-    useNpmrc = result
+    edition = result
   }
 
-  // Email is only needed to derive OGMA_DOWNLOAD_KEY when using .npmrc
+  let apiKey = ''
+  let licenseVersion: string | undefined
+  let useNpmrc = false
   let email = ''
-  if (useNpmrc) {
-    const result = await p.text({
-      message: `Email ${pc.dim('(your get.linkurio.us login email)')}:`,
-      validate: (v) => (v?.trim() ? undefined : 'Email cannot be empty'),
+  if (edition === 'licensed') {
+    // Accepts the full npm link from get.linkurio.us or only the secret
+    const apiKeyResult = await p.password({
+      message: `Ogma API key or full npm link ${pc.dim('(from get.linkurio.us)')}:`,
+      validate: (v) => (v?.trim() ? undefined : 'API key cannot be empty'),
     })
-    if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
-    email = result as string
+    if (p.isCancel(apiKeyResult)) { p.cancel('Cancelled.'); process.exit(1) }
+    const parsed = parseLicenseInput(apiKeyResult as string)
+    apiKey = parsed.apiKey
+    licenseVersion = parsed.version
+
+    // Optional: .npmrc registry auth (default no — most projects are private repos)
+    if (typeof argv.npmrc === 'boolean') {
+      useNpmrc = argv.npmrc
+    } else {
+      const result = await p.confirm({
+        message: `Generate ${pc.cyan('.npmrc')} for registry auth? ${pc.dim('(keeps secret out of package.json — useful for CI/shared repos)')}`,
+        initialValue: false,
+      })
+      if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
+      useNpmrc = result
+    }
+
+    // Email is only needed to derive OGMA_DOWNLOAD_KEY when using .npmrc
+    if (useNpmrc) {
+      const result = await p.text({
+        message: `Email ${pc.dim('(your get.linkurio.us login email)')}:`,
+        validate: (v) => (v?.trim() ? undefined : 'Email cannot be empty'),
+      })
+      if (p.isCancel(result)) { p.cancel('Cancelled.'); process.exit(1) }
+      email = result as string
+    }
   }
 
   // Ogma AI coding skill (default yes; overridable with --skill / --no-skill)
@@ -106,7 +133,7 @@ async function main(): Promise<void> {
     fs.rmSync(targetDir, { recursive: true })
   }
 
-  const { ogmaVersion } = await scaffold({ template, projectName, apiKey, targetDir, useNpmrc })
+  const { ogmaVersion } = await scaffold({ template, projectName, apiKey, targetDir, edition, version: licenseVersion, useNpmrc })
 
   let skillInstalled = false
   if (installSkill) {
@@ -136,7 +163,10 @@ async function main(): Promise<void> {
         `  ${pc.cyan(`export OGMA_DOWNLOAD_KEY=${deriveDownloadKey(email, apiKey)}`)}\n`
       : '') +
     `  ${pc.cyan('npm install')}\n` +
-    `  ${pc.cyan('npm run dev')}`,
+    `  ${pc.cyan('npm run dev')}` +
+    (edition === 'trial'
+      ? `\n\n${pc.dim('Trial build (watermarked). To switch to a licensed build: https://doc.linkurious.com/ogma/latest/tutorials/getting-started/install')}`
+      : ''),
   )
 }
 

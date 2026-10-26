@@ -19,13 +19,37 @@ export type Template = (typeof TEMPLATES)[number];
 
 const PLACEHOLDER_RE = /"@linkurious\/ogma":\s*"[^"]*YOUR_API_KEY[^"]*"/;
 const OGMA_VERSION_RE = /npm\/ogma\/([^/]+)\//;
-const DEFAULT_OGMA_VERSION = "5.3.8";
+const DEFAULT_OGMA_VERSION = "6.0.6";
+const LICENSE_LINK_RE =
+  /npm\/ogma\/([^/?\s"]+)\/?\?secret=([^&\s"]+)/;
+
+export const EDITIONS = ["trial", "licensed"] as const;
+export type Edition = (typeof EDITIONS)[number];
 
 export const OGMA_REGISTRY =
   "https://public-pull.nexus3.linkurious.net/repository/npm-public";
 
 export const ogmaUrl = (version: string, apiKey: string): string =>
   `https://get.linkurio.us/api/get/npm/ogma/${version}/?secret=${apiKey}`;
+
+/** Trial dependency: an npm alias so `import ... from '@linkurious/ogma'` keeps working. */
+export const trialDependency = (version: string): string =>
+  `npm:@linkurious/ogma-trial@${version}`;
+
+/**
+ * Accept either the full npm link copied from get.linkurio.us
+ * (`.../npm/ogma/<version>/?secret=<key>`) or the bare secret.
+ * A pasted link also carries the version it was issued for.
+ */
+export const parseLicenseInput = (
+  input: string,
+): { apiKey: string; version?: string } => {
+  const trimmed = input.trim();
+  const match = trimmed.match(LICENSE_LINK_RE);
+  return match
+    ? { apiKey: match[2], version: match[1] }
+    : { apiKey: trimmed };
+};
 
 /**
  * Derive the OGMA_DOWNLOAD_KEY value expected by the private npm registry.
@@ -48,8 +72,13 @@ export const resolveOgmaVersion = (pkgContent: string): string => {
 interface ScaffoldOptions {
   template: Template;
   projectName: string;
-  apiKey: string;
+  /** Licensed edition: the API key (bare secret). Unused for the trial. */
+  apiKey?: string;
   targetDir: string;
+  /** Defaults to "trial". */
+  edition?: Edition;
+  /** Overrides the version pinned in the template (licensed only). */
+  version?: string;
   /** When true, write an .npmrc pointing @linkurious at the private registry
    *  and use a plain semver dep instead of embedding the secret in the URL. */
   useNpmrc?: boolean;
@@ -58,8 +87,10 @@ interface ScaffoldOptions {
 export async function scaffold({
   template,
   projectName,
-  apiKey,
+  apiKey = "",
   targetDir,
+  edition = "licensed",
+  version,
   useNpmrc = false,
 }: ScaffoldOptions): Promise<{ ogmaVersion: string }> {
   // Templates live in templates/ at the package root (one level up from src/)
@@ -88,9 +119,15 @@ export async function scaffold({
   const pkgPath = path.join(targetDir, "package.json");
   let pkgContent = fs.readFileSync(pkgPath, "utf-8");
 
-  const ogmaVersion = resolveOgmaVersion(pkgContent);
+  const ogmaVersion = version ?? resolveOgmaVersion(pkgContent);
 
-  if (useNpmrc) {
+  if (edition === "trial") {
+    // Public npm: no auth and no .npmrc needed
+    pkgContent = pkgContent.replace(
+      PLACEHOLDER_RE,
+      `"@linkurious/ogma": "${trialDependency(ogmaVersion)}"`,
+    );
+  } else if (useNpmrc) {
     // Use a plain semver dep — auth is handled by .npmrc
     pkgContent = pkgContent.replace(
       PLACEHOLDER_RE,
