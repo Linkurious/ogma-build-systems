@@ -7,6 +7,7 @@ import {
   TEMPLATES,
   ogmaUrl,
   resolveOgmaVersion,
+  parseLicenseInput,
 } from "../src/scaffold.ts";
 import { ogmaVersion } from "../scripts/utils.mjs";
 
@@ -85,7 +86,33 @@ describe("resolveOgmaVersion", () => {
   });
 
   it("falls back to a default version when no match is found", () => {
-    expect(resolveOgmaVersion('{ "dependencies": {} }')).toBe("5.3.8");
+    expect(resolveOgmaVersion('{ "dependencies": {} }')).toBe("6.0.6");
+  });
+});
+
+describe("parseLicenseInput", () => {
+  it("returns a bare key unchanged", () => {
+    expect(parseLicenseInput("  lk-dls-abc  ")).toEqual({ apiKey: "lk-dls-abc" });
+  });
+
+  it("extracts the secret and version from a full npm link", () => {
+    expect(
+      parseLicenseInput(
+        "https://get.linkurio.us/api/get/npm/ogma/6.1.0/?secret=lk-dls-abc",
+      ),
+    ).toEqual({ apiKey: "lk-dls-abc", version: "6.1.0" });
+  });
+});
+
+describe("trial edition", () => {
+  it("writes the npm alias to the trial package without the key", async () => {
+    const targetDir = path.join(tmpDir, "trial");
+    const { ogmaVersion: version } = await scaffold({ template: "vite", projectName: "trial", targetDir, edition: "trial" });
+    const pkg = JSON.parse(fs.readFileSync(path.join(targetDir, "package.json"), "utf-8"));
+    expect(pkg.dependencies["@linkurious/ogma"]).toBe(
+      `npm:@linkurious/ogma-trial@${version}`,
+    );
+    expect(fs.existsSync(path.join(targetDir, ".npmrc"))).toBe(false);
   });
 });
 

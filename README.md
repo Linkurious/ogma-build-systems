@@ -15,14 +15,23 @@ npm create @linkurious/ogma my-app
 The interactive prompts will ask you to:
 
 1. Choose a template: `vite`, `webpack`, `rollup`, `typescript`, `node`, `parcel`, `react`, `vue`, `solid`
-2. Enter your Ogma API key (from [get.linkurio.us](https://get.linkurio.us))
-3. Optionally download the [Ogma AI coding skill](https://doc.linkurious.com/ogma/latest/tutorials/ai-coding/) (defaults to **Yes**)
+2. Choose an edition: **Trial** (default, watermarked, no key needed) or **Licensed**
+3. For Licensed, enter your Ogma API key or the full npm link from [get.linkurio.us](https://get.linkurio.us)
+4. Optionally download the [Ogma AI coding skill](https://doc.linkurious.com/ogma/latest/tutorials/ai-coding/) (defaults to **Yes**)
 
 You can skip the template prompt by passing it as a flag:
 
 ```sh
 npm create @linkurious/ogma my-app -- --template vite
 ```
+
+Use `--edition trial` or `--edition licensed` to skip the edition prompt:
+
+```sh
+npm create @linkurious/ogma my-app -- --template vite --edition trial
+```
+
+Trial projects depend on `npm:@linkurious/ogma-trial`, aliased as `@linkurious/ogma`, so imports stay unchanged. To switch to a licensed build, replace the dependency with the npm link from get.linkurio.us.
 
 Use `--skill` or `--no-skill` to install (or skip) the Ogma AI skill without being prompted:
 
