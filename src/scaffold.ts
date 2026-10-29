@@ -19,7 +19,7 @@ export type Template = (typeof TEMPLATES)[number];
 
 const PLACEHOLDER_RE = /"@linkurious\/ogma":\s*"[^"]*YOUR_API_KEY[^"]*"/;
 const OGMA_VERSION_RE = /npm\/ogma\/([^/]+)\//;
-const DEFAULT_OGMA_VERSION = "6.0.6";
+const DEFAULT_OGMA_VERSION = "6.1.0";
 const LICENSE_LINK_RE =
   /npm\/ogma\/([^/?\s"]+)\/?\?secret=([^&\s"]+)/;
 
