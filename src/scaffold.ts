@@ -19,7 +19,7 @@ export type Template = (typeof TEMPLATES)[number];
 
 const PLACEHOLDER_RE = /"@linkurious\/ogma":\s*"[^"]*YOUR_API_KEY[^"]*"/;
 const OGMA_VERSION_RE = /npm\/ogma\/([^/]+)\//;
-const DEFAULT_OGMA_VERSION = "5.3.8";
+const DEFAULT_OGMA_VERSION = "6.1.0";
 
 export const OGMA_REGISTRY =
   "https://public-pull.nexus3.linkurious.net/repository/npm-public";
