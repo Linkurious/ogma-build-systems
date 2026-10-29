@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@linkurious/code-tools": "0.2.0",
-    "@linkurious/ogma": ">=6.1.1",
+    "@linkurious/ogma": "6.1.1",
     "@types/node": "^24.0.0",
     "concurrently": "10.0.6",
     "typescript": "6.0.3",
