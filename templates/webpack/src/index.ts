@@ -1,9 +1,10 @@
+import "./style.css";
 import { Ogma, type Color, type Node } from "@linkurious/ogma";
 
 const ogma = new Ogma({ container: "graph-container" });
 
 // layout
-ogma.generate
+Ogma.generate
   .randomTree({ nodes: 200 })
   .then((graph) => ogma.setGraph(graph))
   .then(() => ogma.layouts.force({ duration: 100 }))

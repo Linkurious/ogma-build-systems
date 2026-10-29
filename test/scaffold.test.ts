@@ -84,8 +84,8 @@ describe("resolveOgmaVersion", () => {
     expect(resolveOgmaVersion(pkg)).toBe("6.0.2");
   });
 
-  it("falls back to a default version when no match is found", () => {
-    expect(resolveOgmaVersion('{ "dependencies": {} }')).toBe("5.3.8");
+  it("throws when no version is found", () => {
+    expect(() => resolveOgmaVersion('{ "dependencies": {} }')).toThrow();
   });
 });
 

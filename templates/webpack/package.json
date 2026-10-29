@@ -10,8 +10,10 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.0",
     "html-webpack-plugin": "^5.5.0",
     "serve": "^14.2.0",
+    "style-loader": "^4.0.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.2",
     "webpack": "^5.76.2",
@@ -19,7 +21,7 @@
     "webpack-dev-server": "^5.0.0"
   },
   "dependencies": {
-    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.0.6/?secret=YOUR_API_KEY"
+    "@linkurious/ogma": "https://get.linkurio.us/api/get/npm/ogma/6.1.1/?secret=YOUR_API_KEY"
   },
   "browserslist": {
     "production": [
