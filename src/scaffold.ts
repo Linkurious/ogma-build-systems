@@ -19,7 +19,6 @@ export type Template = (typeof TEMPLATES)[number];
 
 const PLACEHOLDER_RE = /"@linkurious\/ogma":\s*"[^"]*YOUR_API_KEY[^"]*"/;
 const OGMA_VERSION_RE = /npm\/ogma\/([^/]+)\//;
-const DEFAULT_OGMA_VERSION = "5.3.8";
 
 export const OGMA_REGISTRY =
   "https://public-pull.nexus3.linkurious.net/repository/npm-public";
@@ -37,12 +36,13 @@ export const deriveDownloadKey = (email: string, apiKey: string): string =>
 /**
  * Extract the Ogma version pinned in a template's `package.json` content.
  * Works for both the `YOUR_API_KEY` placeholder URL and the injected URL,
- * since both embed `npm/ogma/<version>/`. Falls back to a known-good version
- * when no match is found.
+ * since both embed `npm/ogma/<version>/`. Throws when no match is found, so
+ * the version stays defined in one place: the template `package.json` files.
  */
 export const resolveOgmaVersion = (pkgContent: string): string => {
   const match = pkgContent.match(OGMA_VERSION_RE);
-  return match ? match[1] : DEFAULT_OGMA_VERSION;
+  if (!match) throw new Error("No Ogma version found in the template package.json");
+  return match[1];
 };
 
 interface ScaffoldOptions {

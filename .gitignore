@@ -6,6 +6,10 @@ templates/typescript/package-lock.json
 templates/webpack/package-lock.json
 templates/rollup/package-lock.json
 templates/vite/package-lock.json
+templates/parcel/package-lock.json
+templates/react/package-lock.json
+templates/solid/package-lock.json
+templates/vue/package-lock.json
 .parcel-cache
 .DS_Store
 dist
